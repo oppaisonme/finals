@@ -2,6 +2,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 
 
@@ -12,9 +13,20 @@ public class Game extends Canvas implements Runnable{
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 	private Thread thread;
 	private boolean running = false;
+	private Handler handler;
+	private Random r;
 
 	public Game(){
-		new Window(WIDTH, HEIGHT, "Survive!", this);
+		new Window(WIDTH, HEIGHT, "DODGE MO PAMALO NI NANAY!", this);
+
+		r = new Random();
+		handler = new Handler();
+
+		for(int i = 0; i< 50; i++){
+			handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
+					
+		}
+		
 	}
 	
 	public synchronized void start(){
@@ -60,11 +72,13 @@ public class Game extends Canvas implements Runnable{
                     System.out.println("FPS: "+ frames);
                     frames = 0;
                 }
-        }stop();
+        }
+        stop();
      }          
     
 
 	private void tick(){
+		handler.tick();
 
 	}
 
@@ -73,13 +87,14 @@ public class Game extends Canvas implements Runnable{
 		if(bs == null){
 			this.createBufferStrategy(3);
 			return;
-
 		}
 
 		Graphics g = bs.getDrawGraphics();
 
 		g.setColor(Color.cyan);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+
+		handler.render(g);
 
 		g.dispose();
 		bs.show();
