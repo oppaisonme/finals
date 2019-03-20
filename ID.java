@@ -5,5 +5,7 @@ public enum ID{
 	Trail(),
 	FastEnemy(),
 	EnemyBossBullet(),
-	EnemyBoss();
+	EnemyBossBullet2(),
+	EnemyBoss(),
+	EnemyBoss2();
 }

@@ -5,14 +5,14 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 
-public class EnemyBoss extends GameObject{
+public class EnemyBoss2 extends GameObject{
 
 	private Handler handler;
 	Random r = new Random();
 	private int timer = 80;
 	private int timer2 = 50;
 	
-	public EnemyBoss(int x, int y, ID id, Handler handler){
+	public EnemyBoss2(int x, int y, ID id, Handler handler){
 		super(x, y, id);
 
 		this.handler = handler;
@@ -47,7 +47,7 @@ public class EnemyBoss extends GameObject{
 
 			velX = Game.clamp(velX, -10, 10);
 			int spawn = r.nextInt(10);
-			if(spawn == 0) handler.addObject(new EnemyBossBullet(x+48, y+48, ID.BasicEnemy, handler));
+			if(spawn == 0) handler.addObject(new EnemyBossBullet2(x+48, y+48, ID.FastEnemy, handler));
 		}
 
 		if(x <= 0 || x >= Game.WIDTH - 110) velX *= -1;
@@ -56,7 +56,7 @@ public class EnemyBoss extends GameObject{
 	}
 
 	public void render(Graphics g){
-		g.setColor(Color.red);
+		g.setColor(Color.cyan);
 		g.fillRect(x, y, 96, 96);
 	}
 }
